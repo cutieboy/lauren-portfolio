@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown'
+import { useMediaQuery } from 'react-responsive'
 import Axios from 'axios';
 import './App.css';
  
@@ -16,6 +17,10 @@ function App() {
   const [mobileMenu, showMobileMenu] = useState(false);
   const [active, setActive] = useState('#all');
   const [oldActive, setOldActive] = useState('#all');
+
+  const isDesktopOrLaptop = useMediaQuery({
+    query: '(min-width: 1224px)'
+  })
 
   const API = "https://lauren-api-mongo.herokuapp.com";
 
@@ -57,7 +62,6 @@ function App() {
     if(lightBoxSetting === true) {
       document.querySelector('.lightbox').style.visibility = 'visible';
       document.querySelector('.lightbox').style.textDecoration = "none";
-      document.querySelector('body').style.overflow = 'hidden';
     } else {
       document.querySelector('.lightbox').style.visibility = "hidden";
       document.querySelector('body').style.overflow = 'visible';
@@ -135,7 +139,7 @@ function App() {
       <div id="header">
         <div id="logo">
           <p id="logo-name">LAUREN PICKERING</p>
-          <p id="logo-job">Visual Development / Character Design</p>
+          <p id="logo-job">Illustrator / Visual Development / Character Design</p>
         </div>
         <div id="menu">
           <a className="active" id="all" onClick={() => {
@@ -155,7 +159,7 @@ function App() {
         {imageDataList}
       </div>
       <div onClick={() => {
-        toggleLightBox(false)
+        isDesktopOrLaptop && toggleLightBox(false)
         }} href="#" className="lightbox">
         <img className="lightbox-image" src={imageURL} />
         <div className="lightbox-text">
