@@ -7,7 +7,6 @@ function App() {
   const [isLoading, setIsLoading] = useState(true)
   const [imageData, setImageData] = useState([]);
   const [aboutData, setAboutData] = useState();
-  // const [filterData, setFilterData] = useState('all');
   const [lightBox, setLightBox] = useState();
   const [lightBoxSetting, toggleLightBox] = useState(false);
   const [lightBoxTitle, setLightBoxTitle] = useState();
@@ -19,24 +18,6 @@ function App() {
   const [oldActive, setOldActive] = useState('#all');
 
   const API = "https://lauren-api-mongo.herokuapp.com";
-
-  // const imageDataList = imageData.filter((piece) => 
-  //     filterData === 'all' || piece.ImageType === filterData
-  //   ).map((piece, index) => (
-  //     <a key={index} onClick={() => {
-  //       setLightBox(index);
-  //       setImageURL(piece.Image[0].url);
-  //       toggleLightBox(true);
-  //       setLightBoxTitle(piece.Title);
-  //       setLightBoxDescription(piece.Description);
-  //     }} href={"#image-" + index} className={"image-parent " + piece.ImageSize + " " + piece.ImageType}>
-  //         <img className={"image"} key={index} src={piece.Image[0].url} />
-  //     <div className="overlay-container">
-  //       <div className="overlay"></div>
-  //       <p className="title">{piece.Title}</p>
-  //     </div>
-  //   </a>
-  // ))
 
   imageData.sort((a, b) => {
     return a.order - b.order;
@@ -70,6 +51,7 @@ function App() {
   }, [])
  
   useEffect(() => {
+
     if(isLoading === false) {
     document.querySelector('.lightbox').id = "image-" + lightBox;
     if(lightBoxSetting === true) {
@@ -141,27 +123,10 @@ function App() {
             <span id="bottom-span"></span>
           </button>
           <a className="mobile-menu" onClick={() => {
-            // setFilterData('all');
             showAboutContact(false);
             showMobileMenu(false);
           }}>All</a>
-          {/* <a className="mobile-menu" onClick={() => {
-            setFilterData('characters');
-            showAboutContact(false);
-            showMobileMenu(false);
-          }}>Characters</a>
           <a className="mobile-menu" onClick={() => {
-            setFilterData('drawings');
-            showAboutContact(false);
-            showMobileMenu(false);
-          }}>Drawings</a>
-          <a className="mobile-menu" onClick={() => {
-            setFilterData('environments');
-            showAboutContact(false);
-            showMobileMenu(false);
-          }}>Other</a> */}
-          <a className="mobile-menu" onClick={() => {
-            // setFilterData(null);
             showAboutContact(true);
             showMobileMenu(false);
           }}>About / Contact</a>
@@ -174,31 +139,11 @@ function App() {
         </div>
         <div id="menu">
           <a className="active" id="all" onClick={() => {
-            // setFilterData('all');
             showAboutContact(false);
             setOldActive(active);
             setActive('#all')
           }}>All</a>
-          {/* <a id="characters" onClick={() => {
-            setFilterData('characters');
-            showAboutContact(false);
-            setOldActive(active);
-            setActive('#characters')
-          }}>Characters</a>
-          <a id="drawings" onClick={() => {
-            setFilterData('drawings');
-            showAboutContact(false);
-            setOldActive(active);
-            setActive('#drawings')
-          }}>Drawings</a>
-          <a id="environments" onClick={() => {
-            setFilterData('environments');
-            showAboutContact(false);
-            setOldActive(active);
-            setActive('#environments')
-          }}>Other</a> */}
           <a id="about-contact" onClick={() => {
-            // setFilterData(null);
             showAboutContact(true);
             setOldActive(active);
             setActive('#about-contact')
